@@ -1,96 +1,88 @@
 #include <iostream>
-#include <exception>
+
 using namespace std;
 
-int** genMap(int, int*);
-void printMap(int**, int, int*);
-void changeGrade(int**, int, int, int);
+class BirthDate
+{
+	private:
+		//public fields
+		int year = 0;
+		int month = 0;
+		int day = 0;
+	public:
+		//Print function for BirthDate objects
+		void print(){
+			cout << month << "/" << day << "/" << year;
+		}
+		//Combination Setter
+		void set(int d, int m, int y)
+		{
+			year = y;
+			day = d;
+			month = m;
+		}
+		//Individual Setters
+		void setYear(int y)
+		{
+			year = y;
+		}
+		void setMonth(int m)
+		{
+			month = m;
+		}
+		void setDay(int d)
+		{
+			day = d;
+		}
+		//Individual Getters
+		int getYear()
+		{
+			return year;
+		}
+		int getMonth()
+		{
+			return month;
+		}
+		int getDay()
+		{
+			return day;
+		}
+
+};
+
 int main()
 {
-	
-	int rows = 0;
-	
-	cout << "Please enter a number of rows: ";
-	cin >> rows;
-	int* arrayOfColumns = new int[rows];
-	for(int i = 0; i < rows; ++i)
-	{
-		int columns = 0;
-		cout << "Please enter a number of computers: ", cin >> columns;		
-		arrayOfColumns[i] = columns;
-	}
-	int** map = genMap(rows, arrayOfColumns);
-	printMap(map, rows, arrayOfColumns);
-	
-	bool continuation = true;
+	//Create two BirthDate objects
+	BirthDate bob;
+	BirthDate tom;
 
-	while(continuation)
-	{
-		int x = 0;
-		int y = 0;
-		int grade = 0;
+	//No longer used because of private access modifier
+	int d, y, m;
+	//Ask user for birthday's day
+	cout << "Enter bob's birthday's day: ";
+	cin >> d; 
+	bob.setDay(d);
 
-		cout << "Pick a row/computer to set a grade on.\n";
-		cout << "X: ";
-		cin >> x;
-		
-		cout << "Y: ";
-		cin >> y;
+	//Ask for year
+	cout << "Enter bobs birthday year: ";
+	cin >> y; 
+	bob.setYear(y);
 
-		cout << "Grade: ";
-		cin >> grade;
+	//Ask for month
+	cout << "Enter bobs birthday month: ";
+	cin >> m; 
+	bob.setMonth(m);
 
-		changeGrade(map, x, y, grade);
 
-		printMap(map, rows, arrayOfColumns);
 
-	}
+	//Should be user entered birthday
+	bob.print();
+	cout << endl;
+	//Toms birthday should be 0
+	tom.print();
+
+
+
 
 	return 0;
-}
-void changeGrade(int** map, int x, int y, int grade)
-{
-	map[x-1][y-1] = grade;
-}
-int** genMap(int rows, int* arrayOfColumns)
-{
-	//Allocate a two dimensional row x column array
-	int** map = new int*[rows];
-	for (int i = 0; i < rows; ++i)
-	{
-		map[i] = new int[arrayOfColumns[i]];
-	}
-
-	//Fill array with Blank Tiles
-	for (int i = 0; i < rows; ++i)
-	{
-		int columns = arrayOfColumns[i];
-		for (int j = 0; j < columns; ++j)
-		{
-			//Blank or Clear Tile
-			map[i][j] = 0;
-		}
-	}
-	return map;
-}
-
-void printMap(int** map, int rows, int* arrayOfColumns)
-{	
-	for(int i = 0; i < rows; ++i)
-	{
-		int columns = arrayOfColumns[i];
-		for(int j = 0; j < columns; ++j)
-		{
-			if(map[i][j] == 0)
-			{
-				cout << "empty" << " ";
-			}
-			else
-			{
-				cout << map[i][j] << " ";
-			}
-			
-		}
-		cout << endl;
-	}
 }
