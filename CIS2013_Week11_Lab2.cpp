@@ -5,7 +5,7 @@ using namespace std;
 class BirthDate
 {
 	private:
-		//public fields
+		//private fields
 		int year = 0;
 		int month = 0;
 		int day = 0;
